@@ -20,4 +20,4 @@ App 使用了 [google-maps-react](https://www.npmjs.com/package/google-maps-reac
 - Google Maps API
 
 
- #安装启动  1.到项目所在目录  2.npm install  3.npm start   4.浏览器打开localhost:3000
+ 安装启动 1.克隆该仓库 2.到项目所在目录  3.npm install  4.npm start   5.浏览器打开localhost:3000
