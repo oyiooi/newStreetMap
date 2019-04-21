@@ -78,10 +78,8 @@ class Marker extends Component {
                 .then(response => response.json())
                 .then(data => {
                     photos = data;
-                    return fetch(`https://api.foursquare.com/v2/venues/${venueID}/similar?v=20180323&limit=2&client_id=${client.id}&client_secret=${client.secret}`);
+                    createWindow(tips, photos);
                 })
-                .then(response => response.json())
-                .then(data =>  createWindow(tips, photos,data))
                 .catch(err => requestError(err, 'Foursquare'));
 
             //if sucess in Request
@@ -92,17 +90,17 @@ class Marker extends Component {
                     const tipsData = tips.response.tips.items;
                     const photosData = photos.response.photos.items;
 
-                    description = `<div id="marker__body"><h1 style="background:white">${name}</h1>
+                    description = `<div id="marker__body"><h2 style="text-align:center;background:white">${name}</h2>
                     <p><span><strong>Address:</strong>${address}</span></p>
-                    <h2>Photos</h2>`
+                    <h3>Photos:</h3>`
                     for(let photo of photosData) {
                         description += `<img alt="${name}" style="padding:5px;" src="${photo.prefix}64x64${photo.suffix}" />`;
                     }
-                    description += '<h2>Tips </h2> <ul id="tips__list">';
+                    description += '<h3>Tips: </h3> <ul id="tips__list">';
                     tipsData.forEach( tip => {
-                        description += `<li style="border:0;display:inline-block;margin:0;line-height:50%">${tip.text}</li>`;
+                        description += `<li style="border:0;display:inline-block;margin:0;line-height:100%;text-align:left;height:fit-content;">${tip.text}</li>`;
                     })
-                    description += `<p style="margin-top:40px"><em><small>Informations from <img alt="Forusquare logo" src="../img/foursquare.png" style="height:16px" /></small></em></p> </div>`;
+                    description += `<p style="margin-top:5px"><em><small>Informations from <img alt="Forusquare logo" src="../img/foursquare.png" style="height:16px" /></small></em></p> </div>`;
                 } else {
                     description = `<p>There is no TIP's <i class="fas fa-frown"></i></p>`;
                 }
